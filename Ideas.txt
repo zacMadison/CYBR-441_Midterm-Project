@@ -1,0 +1,9 @@
+Goal: produce a functional, clean, and useful application that embeds AI.
+
+Current Ideas:
+  Vs AI: make AI play a simple game against a real human player via API calls with a system prompt that enforces inclusion of a response with a specific format (Could also include AI thought process as extra)
+
+  AIdle: Have multiple AIs and generic prompts, show the user the prompt used and the AI response and have the user guess which AI model the response came from
+
+  Gaslight GPT: A webpage which allows the user to directly communicate with ChatGPT(or other ai model) and change the AI response before sending a new response back
+    NOTE: I have no idea if it is still possible to change AI response in chat history when working with API, and I only know of this working in the past with ChatGPT
