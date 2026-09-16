@@ -1,2 +1,3 @@
 # CYBR-441_Midterm-Project
-Midterm for Class CYBR-441: Artificial Intelligence
+Enter new idea into ideas.txt 
+Midterm Project folder will be where actual work is submitted.
