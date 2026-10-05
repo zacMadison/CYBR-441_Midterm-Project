@@ -30,6 +30,8 @@ from huggingface_hub import InferenceClient
             If you get this error wait 5 minutes before trying again.
         Reasoning models cannot be used, <think> tags will frequently be unclosed, and therefore impossible to remove
   
+    FUNCTION CONTRIBUTORS:
+        Zach M.- reasearch, scripting, and testing
 """
 def callAPI( chosen_model:str, prompt:str)->str:
     client = InferenceClient(provider="auto", token="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")
