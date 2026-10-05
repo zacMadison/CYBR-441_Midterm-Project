@@ -33,10 +33,10 @@ from huggingface_hub import InferenceClient
     FUNCTION CONTRIBUTORS:
         Zach M.- reasearch, scripting, and testing
 """
-def callAPI( chosen_model:str, prompt:str)->str:
+def callAPI( model:str, prompt:str)->str:
     client = InferenceClient(provider="auto", token="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")
     text = client.chat.completions.create(
-        model=chosen_model,
+        model=model,
         messages=[
            
             {
