@@ -1,9 +1,11 @@
 import random
+from app import App
 import API_Interaction as API
 # NOTE: PLEASE RUN "pip install huggingface_hub" FOR API CALLS TO WORK
 
 def main():
-    pass
+    app = App()
+    app.mainloop()
 
 
 
