@@ -52,5 +52,5 @@ def callAPI( model:str, prompt:str)->str:
         ]
         
     )
-    return text.choices[0].message.content
+    return text.choices[0].message.content # type: ignore
 
