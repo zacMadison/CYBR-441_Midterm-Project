@@ -5,7 +5,7 @@ from game_screen import GameScreen
 class App(tk.Tk):
   def __init__(self):
     super().__init__()
-    self.title("AIdle")
+    self.title("AI-dle")
     self.geometry("800x600")
 
   # The code in the rest of this class is code that I researched and I do have an external source that I will add on when adding official documentation
@@ -41,7 +41,7 @@ class StartScreen(tk.Frame):
     super().__init__(parent)
     self.controller = controller
 
-    title = tk.Label(self, text="AIdle", font=("Arial", 50, "bold"))
+    title = tk.Label(self, text="AI-dle", font=("Arial", 50, "bold"))
     title.place(relx=0.5, rely=0.35, anchor="center")
 
     start = tk.Button(self, text="START", width="15", height="2", font=("Arial", 14), command=partial(self.controller.show_frame, "game_screen"))
