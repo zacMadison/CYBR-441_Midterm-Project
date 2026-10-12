@@ -16,7 +16,10 @@ def main():
     Returns: Singular randomly chosen LLM name in string format
 """
 def getRandomModel() -> str:
-    models = ["Qwen/Qwen3-Coder-480B-A35B-Instruct", "openai/gpt-oss-120b", "XiaomiMiMo/MiMo-V2.6-Pro-RL", "deepseek-ai/DeepSeek-V3.2", "google/gemma-4-31B-it", "zai-org/GLM-4.5"]
+    models = ["liquid/lfm-2.5-2.6b:free",
+      "nvidia/nemotron-3.5-lightning:free",
+      "dots-studio/dots-3-note-preview:free",
+      "google/gemma-4-26b-a4b-it:free"]
     return random.choice(models)
 
 """

@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-
+# TODO: populate gamescreen with information from API 
 """
   This will be the screen where the actual game is played
   What will be displayed:
@@ -13,12 +13,10 @@ from tkinter import ttk
 # Choices shown in the dropdown (same models as driver.getRandomModel())
 # Can be replaced later with set_models()
 MODELS = [
-  "Qwen/Qwen3-Coder-480B-A35B-Instruct",
-  "openai/gpt-oss-120b",
-  "XiaomiMiMo/MiMo-V2.6-Pro-RL",
-  "deepseek-ai/DeepSeek-V3.2",
-  "google/gemma-4-31B-it",
-  "zai-org/GLM-4.5",
+  "liquid/lfm-2.5-2.6b:free",
+  "nvidia/nemotron-3.5-lightning:free",
+  "dots-studio/dots-3-note-preview:free",
+  "google/gemma-4-26b-a4b-it:free"
 ]
 
 DROPDOWN_PLACEHOLDER = "Select a model"
