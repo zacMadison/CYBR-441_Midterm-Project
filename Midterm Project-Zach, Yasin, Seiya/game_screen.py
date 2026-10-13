@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+from functools import partial
+
 # TODO: populate gamescreen with information from API 
 """
   This will be the screen where the actual game is played
@@ -69,7 +71,7 @@ class GameScreen(tk.Frame):
     self.model_dropdown.pack(side="left", padx=(0, 10))
 
     self.submit_button = tk.Button(controls, text="Submit", font=("Arial", 12, "bold"),
-                                   width=10, command=self.on_submit)
+                                   width=10, command=partial(controller.show_frame, "final_screen"))
     self.submit_button.pack(side="left")
 
     self.message_label = tk.Label(self, text="", font=("Arial", 12), fg="red")

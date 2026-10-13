@@ -1,6 +1,7 @@
 import tkinter as tk
 from functools import partial
 from game_screen import GameScreen
+from final_screen import FinalScreen
 
 class App(tk.Tk):
   def __init__(self):
@@ -20,7 +21,8 @@ class App(tk.Tk):
     self.frames = {}
     screens = {
       "start_screen": StartScreen,
-      "game_screen": GameScreen
+      "game_screen": GameScreen,
+      "final_screen": FinalScreen
     }
     for name, Screen in screens.items():
       frame = Screen(container, self)
