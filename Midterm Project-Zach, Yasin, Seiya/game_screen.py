@@ -126,7 +126,7 @@ class GameScreen(tk.Frame):
 
 def getRandomPrompt() -> str:
   # add prompts
-  prompts = ["Ask me a deep question", "What makes you an AI"]
+  prompts = ["Ask me a deep question", "What makes you an AI", "What is the meaning of life?", "Write me a simple program.", "What's your opinion on [Major Political Event]", "What model are you?", "Tell me a joke.", "fdl;kjnewakljbnv sadfrkjnbhgy"]
   return random.choice(prompts)
 
 def getRandomModel() -> str:
