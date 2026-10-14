@@ -3,16 +3,6 @@ from tkinter import ttk
 import random
 import API_Interaction
 
-# TODO: populate gamescreen with information from API 
-"""
-  This will be the screen where the actual game is played
-  What will be displayed:
-    An Area to show the prompt that was provided to the AI
-    An area to show the response that the model gave
-    A dropdown box with the different models that the player can choose from
-    A submit button that will take the player to another screen (maybe two screens depending on if it works better to separate the correct and incorrect screens)
-"""
-
 # Choices shown in the dropdown (same models as driver.getRandomModel())
 # Can be replaced later with set_models()
 MODELS = [
@@ -24,12 +14,30 @@ MODELS = [
 
 DROPDOWN_PLACEHOLDER = "Select a model"
 
+'''
+  Class GameScreen
+    This class is where the frame of the game screen it located to populate the randomized prompt and model to guess.
+    
+    The class has a simply design layout with labels to to inform the user what is in the text box below it. When this 
+    frame is called to the top the reset() function runs. This function sets a random prompt and model and then calls the 
+    callAPI() function to get a response from that model to populate into the text box. The player can then choose which 
+    model they believe responded from the dropdown box. When the submit button is pressed, the onSubmit() function runs.
+    This function collects the player's guess and then passes their guess along with the correct model on to final_screen.py,
+    where the guess will be checked and results will be shown.
+    
+    What is displayed on the screen:
+      An Area to show the prompt that was provided to the AI
+      An area to show the response that the model gave
+      A dropdown box with the different models that the player can choose from
+      A submit button that will take the player to FinalScreen (class within final_screen.py)
+'''
+
 class GameScreen(tk.Frame):
   def __init__(self, parent, controller):
     super().__init__(parent)
 
     self.controller = controller
-    self.prompt = ""
+    self.prompt_label = ""
     self.model = ""
 
     self.columnconfigure(0, weight=1)
@@ -75,60 +83,99 @@ class GameScreen(tk.Frame):
     self.model_dropdown.pack(side="left", padx=(0, 10))
 
     self.submit_button = tk.Button(controls, text="Submit", font=("Arial", 12, "bold"),
-                                   width=10, command=self.on_submit)
+                                   width=10, command=self.onSubmit)
     self.submit_button.pack(side="left")
 
     self.message_label = tk.Label(self, text="", font=("Arial", 12), fg="red")
     self.message_label.grid(row=6, column=0, pady=(0, 15))
 
-  def set_prompt(self, prompt):
-    self.set_text(self.prompt_text, prompt)
+  def setPromptText(self, prompt):
+    self.setText(self.prompt_text, prompt)
 
-  def set_response(self, response):
-    self.set_text(self.response_text, response)
+  def setResponseText(self, response):
+    self.setText(self.response_text, response)
 
-  def set_models(self, models):
+  def setModels(self, models):
     self.model_dropdown.config(values=models)
     self.model_var.set(DROPDOWN_PLACEHOLDER)
 
-  def get_guess(self):
+  def getGuess(self) -> str | None :
     guess = self.model_var.get()
     if guess == DROPDOWN_PLACEHOLDER:
       return None
     return guess
 
+  '''
+  reset()
+    This function resets the screen by getting a new random prompt and model. Then uses the new prompt and model to get 
+    another response for the user to guess.
+    
+    ARGS: None
+    RETURNS: Void
+  '''
+
   def reset(self):
-    self.prompt = getRandomPrompt()
+    self.prompt_label = getRandomPrompt()
     self.model = getRandomModel()
-    self.set_prompt(self.prompt)
-    self.set_response(API_Interaction.callAPI(self.model, self.prompt))
+    self.setPromptText(self.prompt_label)
+    self.setResponseText(API_Interaction.callAPI(self.model, self.prompt_label))
     self.model_var.set(DROPDOWN_PLACEHOLDER)
     self.message_label.config(text="")
     self.submit_button.config(state="normal")
 
 
-  def on_submit(self):
-    guess = self.get_guess()
+  '''
+  onSubmit()
+    This function gathers the users guess and then passes it on to the final screen to check results. It runs off the frames
+    implementation that was created in app.py
+    
+    ARGS: None
+    RETURNS: Void
+  '''
+
+  def onSubmit(self):
+    guess = self.getGuess()
     if guess is None:
       self.message_label.config(text="Please select a model first.")
       return
     final = self.controller.frames["final_screen"]
-    final.pass_results(guess, self.model)
-    self.controller.show_frame("final_screen")
-
+    final.checkResults(guess, self.model)
+    self.controller.showFrame("final_screen")
     self.message_label.config(text="")
 
-  def set_text(self, widget, text):
+
+  '''
+  setText()
+    This function takes in a the textbox widget along side a provide text to update the text in that widget
+    
+    ARGS:
+      widget: Read-only textbox that is being updates. For example: response_text
+      text: string that will be displayed in textbox
+      
+    RETURNS: Void
+  '''
+
+  def setText(self, widget: tk.Text, text: str):
     widget.config(state="normal")
     widget.delete("1.0", "end")
     widget.insert("1.0", text)
     widget.config(state="disabled")
 
+"""
+    getRandomModel is a simple function to retrieve the name of a random LLM
+    models: list of tested models in string format
+    Returns: Singular randomly chosen LLM name in string format
+"""
 def getRandomPrompt() -> str:
   # add prompts
   prompts = ["Ask me a deep question", "What makes you an AI", "What is the meaning of life?", "Write me a simple program.", "What's your opinion on [Major Political Event]", "What model are you?", "Tell me a joke.", "fdl;kjnewakljbnv sadfrkjnbhgy"]
   return random.choice(prompts)
 
+
+"""
+    getRandomPrompt is a simple function for return one choice from a few predetermined prompts
+    Returns: prompt in string form
+"""
 def getRandomModel() -> str:
   models = ["liquid/lfm-2.5-2.6b:free",
             "nvidia/nemotron-3.5-lightning:free",
