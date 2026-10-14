@@ -95,4 +95,4 @@ def callAPINew(model:str, prompt:str):
 
   
 
-print(callAPI("google/gemma-4-26b-a4b-it:free" , "Hello, this is a test"))
+#print(callAPI("google/gemma-4-26b-a4b-it:free" , "Hello, this is a test"))

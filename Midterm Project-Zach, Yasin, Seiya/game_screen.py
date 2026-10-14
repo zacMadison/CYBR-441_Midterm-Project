@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-from functools import partial
+import random
+import API_Interaction
 
 # TODO: populate gamescreen with information from API 
 """
@@ -26,7 +27,10 @@ DROPDOWN_PLACEHOLDER = "Select a model"
 class GameScreen(tk.Frame):
   def __init__(self, parent, controller):
     super().__init__(parent)
+
     self.controller = controller
+    self.prompt = ""
+    self.model = ""
 
     self.columnconfigure(0, weight=1)
     self.rowconfigure(4, weight=1)
@@ -71,7 +75,7 @@ class GameScreen(tk.Frame):
     self.model_dropdown.pack(side="left", padx=(0, 10))
 
     self.submit_button = tk.Button(controls, text="Submit", font=("Arial", 12, "bold"),
-                                   width=10, command=partial(controller.show_frame, "final_screen"))
+                                   width=10, command=self.on_submit)
     self.submit_button.pack(side="left")
 
     self.message_label = tk.Label(self, text="", font=("Arial", 12), fg="red")
@@ -94,8 +98,10 @@ class GameScreen(tk.Frame):
     return guess
 
   def reset(self):
-    self.set_prompt("")
-    self.set_response("")
+    self.prompt = getRandomPrompt()
+    self.model = getRandomModel()
+    self.set_prompt(self.prompt)
+    self.set_response(API_Interaction.callAPI(self.model, self.prompt))
     self.model_var.set(DROPDOWN_PLACEHOLDER)
     self.message_label.config(text="")
     self.submit_button.config(state="normal")
@@ -106,6 +112,9 @@ class GameScreen(tk.Frame):
     if guess is None:
       self.message_label.config(text="Please select a model first.")
       return
+    final = self.controller.frames["final_screen"]
+    final.pass_results(guess, self.model)
+    self.controller.show_frame("final_screen")
 
     self.message_label.config(text="")
 
@@ -114,3 +123,15 @@ class GameScreen(tk.Frame):
     widget.delete("1.0", "end")
     widget.insert("1.0", text)
     widget.config(state="disabled")
+
+def getRandomPrompt() -> str:
+  # add prompts
+  prompts = ["Ask me a deep question", "What makes you an AI"]
+  return random.choice(prompts)
+
+def getRandomModel() -> str:
+  models = ["liquid/lfm-2.5-2.6b:free",
+            "nvidia/nemotron-3.5-lightning:free",
+            "dots-studio/dots-3-note-preview:free",
+            "google/gemma-4-26b-a4b-it:free"]
+  return random.choice(models)

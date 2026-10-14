@@ -7,7 +7,7 @@ class App(tk.Tk):
   def __init__(self):
     super().__init__()
     self.title("AI-dle")
-    self.geometry("800x600")
+    self.geometry("900x700")
 
   # The code in the rest of this class is code that I researched and I do have an external source that I will add on when adding official documentation
   # The idea of this code is to have frames be each screen created at startup
@@ -33,6 +33,8 @@ class App(tk.Tk):
 
   def show_frame(self, name):
       frame = self.frames[name]
+      if name == "game_screen":
+        frame.reset()
       frame.tkraise()
 
 
