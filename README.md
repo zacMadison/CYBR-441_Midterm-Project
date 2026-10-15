@@ -1,23 +1,16 @@
 # CYBR-441_Midterm-Project
 AI-dle: A game where a user guesses what AI generated a response given a random prompt
 
-## Using API_Interaction.py
-  - Import API_Interaction as API (or whatever you would rather use for shorthand)
-  - Call API.callAPI(model, prompt)
-    - Args 
-      - Model selected, list can be found in API_Interaction.py, or at the end of this document
-    - prompt
-      - prompt for AI, formatted as string
+## Running AI-dle
+  - Download files from ["Midterm Project- Zach, Yasin, Seiya"](https://github.com/zacMadison/CYBR-441_Midterm-Project/tree/main/Midterm%20Project-Zach%2C%20Yasin%2C%20Seiya)
+  - Run "driver.py"
      
-## Known Functional Models
-        Qwen/Qwen3-Coder-480B-A35B-Instruct
-        openai/gpt-oss-120b
-        XiaomiMiMo/MiMo-V2.6-Pro-RL
-        deepseek-ai/DeepSeek-V3.2
-        google/gemma-4-31B-it
-        zai-org/GLM-4.5
+## Models Used
+        liquid/lfm-2.5-2.6b:free
+        nvidia/nemotron-3.5-lightning:free
+        dots-studio/dots-3-note-preview:free
+        google/gemma-4-26b-a4b-it:free
         
-## Known Issues
-- 429 Too Many Requests
-    - This response is for a rate limit on API, if this is received wait five minutes before calling callAPI again
+
+
     
