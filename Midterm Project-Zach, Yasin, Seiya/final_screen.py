@@ -38,9 +38,6 @@ class FinalScreen(tk.Frame):
           
       Returns: 
           Void function
-          
-      Contributions:
-          Yasin M. - scripting and testing
   '''
   def checkResults(self, guess: str, model: str):
     self.set_model(model)

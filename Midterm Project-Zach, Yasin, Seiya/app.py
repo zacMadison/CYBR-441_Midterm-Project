@@ -13,17 +13,20 @@ from final_screen import FinalScreen
   Any broad customization is specified there like size. Each frame inherits the container as its parent and this class
   as its controller. The screens dictionary ties a string name to the class name of the screen to use when calling showFrame. 
   But the actual screens live within the frames dictionary. showFrame() is also where the screens are raised to the top. 
-  '''
+  
+  Research:
+    The code from lines 31 to 64 is copied and slightly modified from an external source. It is the code that creates the
+    screens as frames and raises them to the top when it is needed. I modified the code slightly by tying a string key to
+    the class name so that a string can be passed in to the showFrames() function to make it easier. 
+    
+    url: https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter 
+'''
 
 class App(tk.Tk):
   def __init__(self):
     super().__init__()
     self.title("AI-dle")
     self.geometry("900x700")
-
-  # The code in the rest of this class is code that I researched and I do have an external source that I will add on when adding official documentation
-  # The idea of this code is to have frames be each screen created at startup
-  # When the button to go to another screen is pressed, it is simply raised to the top
 
     container = tk.Frame(self)
     container.pack(fill="both", expand=True)
